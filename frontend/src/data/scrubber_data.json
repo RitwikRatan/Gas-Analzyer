@@ -11,7 +11,7 @@
   "scrubbers": [
     {
       "id": "AMMONIA-SCRUBBER",
-      "name": "AMMONIA-SCRUBBER",
+      "name": "Ammonia (NH3) Neutralization Scrubber",
       "location": "Unit 1 - Production Zone SCRUBBER",
       "currentPh": 0.0,
       "avgPh": 9.8,
@@ -219,7 +219,7 @@
     },
     {
       "id": "SCB-604",
-      "name": "SCB-604",
+      "name": "Hydrochloric Acid (HCl) Scrubber",
       "location": "Unit 1 - Production Zone 604",
       "currentPh": 7.21,
       "avgPh": 7.95,
@@ -427,7 +427,7 @@
     },
     {
       "id": "FES-101",
-      "name": "FES-101",
+      "name": "Acid Fume Extraction (HCl / HNO3) Scrubber",
       "location": "Unit 1 - Production Zone 101",
       "currentPh": 9.8,
       "avgPh": 8.99,
@@ -635,7 +635,7 @@
     },
     {
       "id": "SCB-601",
-      "name": "SCB-601",
+      "name": "Hydrogen Sulfide (H2S) Caustic Scrubber",
       "location": "Unit 1 - Production Zone 601",
       "currentPh": 8.3,
       "avgPh": 8.67,
@@ -843,7 +843,7 @@
     },
     {
       "id": "SCB-502",
-      "name": "SCB-502",
+      "name": "Sulfur Dioxide (SO2) Scrubber",
       "location": "Unit 1 - Production Zone 502",
       "currentPh": 9.69,
       "avgPh": 10.6,
@@ -1051,7 +1051,7 @@
     },
     {
       "id": "SCB-501",
-      "name": "SCB-501",
+      "name": "Chlorine Gas (Cl2) Absorption Scrubber",
       "location": "Unit 1 - Production Zone 501",
       "currentPh": 11.1,
       "avgPh": 10.47,
@@ -1259,7 +1259,7 @@
     },
     {
       "id": "SCB-701",
-      "name": "SCB-701",
+      "name": "VOC / Solvent Vapor Carbon Scrubber",
       "location": "Unit 1 - Production Zone 701",
       "currentPh": 0.0,
       "avgPh": 0.0,
@@ -1467,7 +1467,7 @@
     },
     {
       "id": "FES-102",
-      "name": "FES-102",
+      "name": "Alkaline Amine (NH3 / Amines) Fume Scrubber",
       "location": "Unit 1 - Production Zone 102",
       "currentPh": 9.5,
       "avgPh": 9.5,
@@ -1675,7 +1675,7 @@
     },
     {
       "id": "SCB-304",
-      "name": "SCB-304",
+      "name": "Sodium Hypochlorite (NaOCl) Odor Scrubber",
       "location": "Unit 1 - Production Zone 304",
       "currentPh": 9.51,
       "avgPh": 8.96,
@@ -1883,7 +1883,7 @@
     },
     {
       "id": "SCB-605",
-      "name": "SCB-605",
+      "name": "Bromine Vapor (Br2) Neutralization Scrubber",
       "location": "Unit 1 - Production Zone 605",
       "currentPh": 8.27,
       "avgPh": 10.23,
@@ -2091,7 +2091,7 @@
     },
     {
       "id": "SCB-303",
-      "name": "SCB-303",
+      "name": "Nitrogen Oxides (NOx) Reduction Scrubber",
       "location": "Unit 1 - Production Zone 303",
       "currentPh": 10.55,
       "avgPh": 11.14,
@@ -2299,7 +2299,7 @@
     },
     {
       "id": "SCB-301",
-      "name": "SCB-301",
+      "name": "Hydrogen Sulfide (H2S) Primary Scrubber",
       "location": "Unit 1 - Production Zone 301",
       "currentPh": 11.5,
       "avgPh": 11.07,
@@ -2507,7 +2507,7 @@
     },
     {
       "id": "GCB-6-SCRUBBER",
-      "name": "GCB-6-SCRUBBER",
+      "name": "Chlorinated Gas Absorption Column (Cl2)",
       "location": "Unit 1 - Production Zone SCRUBBER",
       "currentPh": 0.0,
       "avgPh": 0.0,
@@ -2715,7 +2715,7 @@
     },
     {
       "id": "SCB-107",
-      "name": "SCB-107",
+      "name": "Methyl Chloride (CH3Cl) Off-Gas Scrubber",
       "location": "Unit 1 - Production Zone 107",
       "currentPh": 0.0,
       "avgPh": 9.13,
@@ -2923,7 +2923,7 @@
     },
     {
       "id": "SCB-106",
-      "name": "SCB-106",
+      "name": "Triethylamine (TEA) Basic Scrubber",
       "location": "Unit 1 - Production Zone 106",
       "currentPh": 0.0,
       "avgPh": 8.37,
@@ -3131,7 +3131,7 @@
     },
     {
       "id": "SCB-105",
-      "name": "SCB-105",
+      "name": "Acetic Acid (CH3COOH) Vapor Scrubber",
       "location": "Unit 1 - Production Zone 105",
       "currentPh": 10.7,
       "avgPh": 11.23,
@@ -3339,7 +3339,7 @@
     },
     {
       "id": "SCB-901",
-      "name": "SCB-901",
+      "name": "Emergency Caustic Tail-Gas (NaOH) Scrubber",
       "location": "Unit 1 - Production Zone 901",
       "currentPh": 11.68,
       "avgPh": 11.49,
@@ -3547,7 +3547,7 @@
     },
     {
       "id": "SCB-102",
-      "name": "SCB-102",
+      "name": "Phosgene / Carbonyl Gas (COCl2) Scrubber",
       "location": "Unit 1 - Production Zone 102",
       "currentPh": 7.52,
       "avgPh": 8.59,
@@ -3755,7 +3755,7 @@
     },
     {
       "id": "SCB-104",
-      "name": "SCB-104",
+      "name": "Sulfuric Acid (H2SO4) Mist Scrubber",
       "location": "Unit 1 - Production Zone 104",
       "currentPh": 12.5,
       "avgPh": 11.34,
@@ -3963,7 +3963,7 @@
     },
     {
       "id": "SCB-302",
-      "name": "SCB-302",
+      "name": "Hydrogen Bromide (HBr) Scrubber",
       "location": "Unit 1 - Production Zone 302",
       "currentPh": 6.54,
       "avgPh": 7.62,
@@ -4171,7 +4171,7 @@
     },
     {
       "id": "SCB-606",
-      "name": "SCB-606",
+      "name": "Formaldehyde (HCHO) Recovery Scrubber",
       "location": "Unit 1 - Production Zone 606",
       "currentPh": 13.28,
       "avgPh": 11.82,
@@ -4379,7 +4379,7 @@
     },
     {
       "id": "SCB-103",
-      "name": "SCB-103",
+      "name": "Acid Gas Multi-Stage (HCl / H2S) Scrubber",
       "location": "Unit 1 - Production Zone 103",
       "currentPh": 8.81,
       "avgPh": 8.44,
@@ -4590,7 +4590,7 @@
     {
       "id": "ALT-AMMONIASCRUBBER",
       "scrubberId": "AMMONIA-SCRUBBER",
-      "scrubberName": "AMMONIA-SCRUBBER",
+      "scrubberName": "Ammonia (NH3) Neutralization Scrubber",
       "type": "Sensor Connection Error",
       "severity": "Critical",
       "alertLevel": "Critical",
@@ -4608,7 +4608,7 @@
     {
       "id": "ALT-SCB604",
       "scrubberId": "SCB-604",
-      "scrubberName": "SCB-604",
+      "scrubberName": "Hydrochloric Acid (HCl) Scrubber",
       "type": "Alkaline Scrubber Low pH",
       "severity": "Warning",
       "alertLevel": "Warning",
@@ -4626,7 +4626,7 @@
     {
       "id": "ALT-SCB601",
       "scrubberId": "SCB-601",
-      "scrubberName": "SCB-601",
+      "scrubberName": "Hydrogen Sulfide (H2S) Caustic Scrubber",
       "type": "Alkaline Scrubber Low pH",
       "severity": "Warning",
       "alertLevel": "Warning",
@@ -4644,7 +4644,7 @@
     {
       "id": "ALT-SCB701",
       "scrubberId": "SCB-701",
-      "scrubberName": "SCB-701",
+      "scrubberName": "VOC / Solvent Vapor Carbon Scrubber",
       "type": "Sensor Connection Error",
       "severity": "Critical",
       "alertLevel": "Critical",
@@ -4662,7 +4662,7 @@
     {
       "id": "ALT-SCB605",
       "scrubberId": "SCB-605",
-      "scrubberName": "SCB-605",
+      "scrubberName": "Bromine Vapor (Br2) Neutralization Scrubber",
       "type": "Alkaline Scrubber Low pH",
       "severity": "Warning",
       "alertLevel": "Warning",
@@ -4680,7 +4680,7 @@
     {
       "id": "ALT-GCB6SCRUBBER",
       "scrubberId": "GCB-6-SCRUBBER",
-      "scrubberName": "GCB-6-SCRUBBER",
+      "scrubberName": "Chlorinated Gas Absorption Column (Cl2)",
       "type": "Sensor Connection Error",
       "severity": "Critical",
       "alertLevel": "Critical",
@@ -4698,7 +4698,7 @@
     {
       "id": "ALT-SCB107",
       "scrubberId": "SCB-107",
-      "scrubberName": "SCB-107",
+      "scrubberName": "Methyl Chloride (CH3Cl) Off-Gas Scrubber",
       "type": "Sensor Connection Error",
       "severity": "Critical",
       "alertLevel": "Critical",
@@ -4716,7 +4716,7 @@
     {
       "id": "ALT-SCB106",
       "scrubberId": "SCB-106",
-      "scrubberName": "SCB-106",
+      "scrubberName": "Triethylamine (TEA) Basic Scrubber",
       "type": "Sensor Connection Error",
       "severity": "Critical",
       "alertLevel": "Critical",
@@ -4734,7 +4734,7 @@
     {
       "id": "ALT-SCB901",
       "scrubberId": "SCB-901",
-      "scrubberName": "SCB-901",
+      "scrubberName": "Emergency Caustic Tail-Gas (NaOH) Scrubber",
       "type": "Alkaline Scrubber High pH",
       "severity": "Warning",
       "alertLevel": "Warning",
@@ -4752,7 +4752,7 @@
     {
       "id": "ALT-SCB102",
       "scrubberId": "SCB-102",
-      "scrubberName": "SCB-102",
+      "scrubberName": "Phosgene / Carbonyl Gas (COCl2) Scrubber",
       "type": "Alkaline Scrubber Low pH",
       "severity": "Warning",
       "alertLevel": "Warning",
@@ -4770,7 +4770,7 @@
     {
       "id": "ALT-SCB104",
       "scrubberId": "SCB-104",
-      "scrubberName": "SCB-104",
+      "scrubberName": "Sulfuric Acid (H2SO4) Mist Scrubber",
       "type": "Alkaline Scrubber High pH",
       "severity": "Warning",
       "alertLevel": "Warning",
@@ -4788,7 +4788,7 @@
     {
       "id": "ALT-SCB302",
       "scrubberId": "SCB-302",
-      "scrubberName": "SCB-302",
+      "scrubberName": "Hydrogen Bromide (HBr) Scrubber",
       "type": "Alkaline Scrubber Low pH",
       "severity": "Warning",
       "alertLevel": "Warning",
@@ -4806,7 +4806,7 @@
     {
       "id": "ALT-SCB606",
       "scrubberId": "SCB-606",
-      "scrubberName": "SCB-606",
+      "scrubberName": "Formaldehyde (HCHO) Recovery Scrubber",
       "type": "Alkaline Scrubber High pH",
       "severity": "Warning",
       "alertLevel": "Warning",
@@ -4824,7 +4824,7 @@
     {
       "id": "ALT-SCB103",
       "scrubberId": "SCB-103",
-      "scrubberName": "SCB-103",
+      "scrubberName": "Acid Gas Multi-Stage (HCl / H2S) Scrubber",
       "type": "Alkaline Scrubber Low pH",
       "severity": "Warning",
       "alertLevel": "Warning",

@@ -22,7 +22,7 @@ export default function DashboardView({ sensors, onSelectSensor, onRefresh }) {
     let critical = 0;
 
     sensors.forEach((s) => {
-      const st = evaluateStatus(s.currentValue);
+      const st = evaluateStatus(s.currentValue, s.gas_type, s.status);
       if (st === 'Healthy') healthy++;
       else if (st === 'Warning') warning++;
       else if (st === 'Critical') critical++;
@@ -37,7 +37,7 @@ export default function DashboardView({ sensors, onSelectSensor, onRefresh }) {
       const matchesSearch = s.device_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
         (s.location && s.location.toLowerCase().includes(searchTerm.toLowerCase()));
 
-      const status = evaluateStatus(s.currentValue);
+      const status = evaluateStatus(s.currentValue, s.gas_type, s.status);
       const matchesStatus = statusFilter === 'All' || status === statusFilter;
 
       return matchesSearch && matchesStatus;

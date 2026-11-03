@@ -33,22 +33,40 @@ export default function ScrubberDetailView({ scrubber, alerts, onBack, onResolve
   const [timeFilter, setTimeFilter] = useState('Daily');
   const [xaiExplanation, setXaiExplanation] = useState('');
   const [isLoadingXAI, setIsLoadingXAI] = useState(false);
+  const [mlForecast, setMlForecast] = useState(null);
 
   useEffect(() => {
     if (sensor) {
       setIsLoadingXAI(true);
-      
-      // Use local observations instead of calling the nonexistent API
-      setTimeout(() => {
-        setXaiExplanation(sensor.aiObservations || 'Telemetry analysis indicates stable gas dynamics over the monitored window.');
-        setIsLoadingXAI(false);
-      }, 500);
+      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+      const sId = parseInt(sensor.sensor_id, 10);
+
+      const fetchMLData = async () => {
+        try {
+          if (!isNaN(sId)) {
+            const res = await fetch(`${apiUrl}/analytics/forecast/${sId}`);
+            if (res.ok) {
+              const data = await res.json();
+              if (data && data.forecasts && data.forecasts.length > 0) {
+                setMlForecast(data);
+              }
+            }
+          }
+        } catch (e) {
+          console.warn('Forecast fetch skipped:', e);
+        } finally {
+          setXaiExplanation(sensor.aiObservations || 'Telemetry analysis indicates stable gas dynamics over the monitored window.');
+          setIsLoadingXAI(false);
+        }
+      };
+
+      fetchMLData();
     }
   }, [sensor]);
 
   if (!sensor) return null;
 
-  const status = evaluateStatus(sensor.currentValue);
+  const status = evaluateStatus(sensor.currentValue, sensor.gas_type, sensor.status);
   const colorStyle = getStatusColor(status);
 
   // Filter alerts relevant to this sensor
@@ -466,6 +484,144 @@ export default function ScrubberDetailView({ scrubber, alerts, onBack, onResolve
             {isLoadingXAI ? 'Generating explainable AI observations...' : xaiExplanation}
           </p>
         </div>
+
+        {/* Machine Learning Multi-Step Forecast Card */}
+        {mlForecast && (
+          <div style={{
+            padding: '20px',
+            borderRadius: '16px',
+            background: 'var(--bg-card)',
+            border: '1px solid var(--border-color)',
+            boxShadow: 'var(--card-shadow)'
+          }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '12px' }}>
+              <div style={{
+                padding: '6px',
+                borderRadius: '8px',
+                background: 'rgba(21, 101, 192, 0.12)',
+                color: 'var(--primary)'
+              }}>
+                <TrendingUp size={18} />
+              </div>
+              <h3 style={{ fontSize: '16px', fontWeight: 700, color: 'var(--text-main)', margin: 0 }}>
+                ML Multi-Step Forecast (Ridge AR-4)
+              </h3>
+            </div>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: '10px' }}>
+              {mlForecast.forecasts.map((fc, i) => (
+                <div key={i} style={{
+                  background: 'var(--bg-main)',
+                  padding: '10px 12px',
+                  borderRadius: '10px',
+                  border: '1px solid var(--border-subtle)',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '4px'
+                }}>
+                  <span style={{ fontSize: '11px', color: 'var(--text-dim)', fontWeight: 600 }}>{fc.horizon}</span>
+                  <span style={{ fontSize: '15px', fontWeight: 800, color: 'var(--text-main)', fontFamily: 'var(--font-mono)' }}>
+                    {fc.projected_value} {fc.unit}
+                  </span>
+                  <span style={{ fontSize: '11px', color: fc.status.startsWith('Critical') ? 'var(--accent-danger)' : fc.status.startsWith('Warning') ? 'var(--accent-warning)' : 'var(--accent-success)', fontWeight: 700 }}>
+                    {fc.status.split(' ')[0]}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Machine Learning Multi-Step Forecast Card */}
+
+        {mlForecast && (
+
+          <div style={{
+
+            padding: '20px',
+
+            borderRadius: '16px',
+
+            background: 'var(--bg-card)',
+
+            border: '1px solid var(--border-color)',
+
+            boxShadow: 'var(--card-shadow)'
+
+          }}>
+
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '12px' }}>
+
+              <div style={{
+
+                padding: '6px',
+
+                borderRadius: '8px',
+
+                background: 'rgba(21, 101, 192, 0.12)',
+
+                color: 'var(--primary)'
+
+              }}>
+
+                <TrendingUp size={18} />
+
+              </div>
+
+              <h3 style={{ fontSize: '16px', fontWeight: 700, color: 'var(--text-main)', margin: 0 }}>
+
+                ML Multi-Step Forecast (Ridge AR-4)
+
+              </h3>
+
+            </div>
+
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: '10px' }}>
+
+              {mlForecast.forecasts.map((fc, i) => (
+
+                <div key={i} style={{
+
+                  background: 'var(--bg-main)',
+
+                  padding: '10px 12px',
+
+                  borderRadius: '10px',
+
+                  border: '1px solid var(--border-subtle)',
+
+                  display: 'flex',
+
+                  flexDirection: 'column',
+
+                  gap: '4px'
+
+                }}>
+
+                  <span style={{ fontSize: '11px', color: 'var(--text-dim)', fontWeight: 600 }}>{fc.horizon}</span>
+
+                  <span style={{ fontSize: '15px', fontWeight: 800, color: 'var(--text-main)', fontFamily: 'var(--font-mono)' }}>
+
+                    {fc.projected_value} {fc.unit}
+
+                  </span>
+
+                  <span style={{ fontSize: '11px', color: fc.status.startsWith('Critical') ? 'var(--accent-danger)' : fc.status.startsWith('Warning') ? 'var(--accent-warning)' : 'var(--accent-success)', fontWeight: 700 }}>
+
+                    {fc.status.split(' ')[0]}
+
+                  </span>
+
+                </div>
+
+              ))}
+
+            </div>
+
+          </div>
+
+        )}
+
+
 
         {/* Recommended Actions */}
         <div style={{

@@ -35,3 +35,16 @@ node_modules/
 dist/
 build/
 .env.local
+
+# Documents & Binary Artifacts (PDFs)
+*.pdf
+
+# Local Databases & Binary SQLite Stores
+*.db
+*.sqlite
+*.sqlite3
+
+# Temporary Scratch Scripts & Working Files
+scratch/
+*.log
+

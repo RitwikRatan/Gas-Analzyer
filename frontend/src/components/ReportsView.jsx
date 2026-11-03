@@ -7,7 +7,7 @@ export default function ReportsView({ scrubbers, alerts }) {
   const [statusFilter, setStatusFilter] = useState('All');
 
   const filteredScrubbers = scrubbers.filter(s => {
-    const status = evaluateStatus(s.currentValue);
+    const status = evaluateStatus(s.currentValue, s.gas_type, s.status);
     const mappedStatus = status === 'Healthy' ? 'Normal' : status === 'Warning' ? 'Moderate' : 'Critical';
     
     const matchesText = s.device_name.toLowerCase().includes(filterText.toLowerCase());
@@ -16,7 +16,7 @@ export default function ReportsView({ scrubbers, alerts }) {
     return matchesText && matchesStatus;
   });
 
-  const healthyCount = scrubbers.filter(s => evaluateStatus(s.currentValue) === 'Healthy').length;
+  const healthyCount = scrubbers.filter(s => evaluateStatus(s.currentValue, s.gas_type, s.status) === 'Healthy').length;
   const totalCount = scrubbers.length;
   const complianceRate = totalCount > 0 ? ((healthyCount / totalCount) * 100).toFixed(1) : '100.0';
 
@@ -29,7 +29,7 @@ export default function ReportsView({ scrubbers, alerts }) {
   const handleDownloadCSV = () => {
     const headers = ['Sensor ID', 'Current Value', '24h Avg', 'Min', 'Max', 'Compliance Status'];
     const rows = filteredScrubbers.map(s => {
-      const status = evaluateStatus(s.currentValue);
+      const status = evaluateStatus(s.currentValue, s.gas_type, s.status);
       const statusLabel = status === 'Healthy' ? 'Normal' : status === 'Warning' ? 'Moderate' : 'Critical';
       return [
         s.device_name,
@@ -299,7 +299,7 @@ export default function ReportsView({ scrubbers, alerts }) {
             </thead>
           <tbody>
             {filteredScrubbers.map((s, idx) => {
-              const status = evaluateStatus(s.currentValue);
+              const status = evaluateStatus(s.currentValue, s.gas_type, s.status);
               return (
                 <tr key={s.sensor_id} className="animate-row" style={{ '--row-index': idx, borderBottom: '1px solid var(--border-subtle)' }}>
                   <td style={{ padding: '12px 18px', fontWeight: 800, color: 'var(--text-main)', fontFamily: 'var(--font-mono)' }}>{s.device_name}</td>

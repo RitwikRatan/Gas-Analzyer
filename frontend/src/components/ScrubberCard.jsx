@@ -10,7 +10,7 @@ import {
 import { evaluateStatus, getStatusColor, ALERTS_RULES } from '../data/scrubberData';
 
 export default function ScrubberCard({ scrubber, index = 0, onClick }) {
-  const status = evaluateStatus(scrubber.currentValue);
+  const status = evaluateStatus(scrubber.currentValue, scrubber.gas_type, scrubber.status);
   const colorStyle = getStatusColor(status);
 
   // Status Badge Animation Class getter
@@ -158,7 +158,7 @@ export default function ScrubberCard({ scrubber, index = 0, onClick }) {
         <div style={{ textAlign: 'right' }}>
           <span style={{ fontSize: '10.5px', color: 'var(--text-dim)' }}>Safe Limit</span>
           <div style={{ fontSize: '12px', color: 'var(--text-main)', fontWeight: 700, fontFamily: 'var(--font-mono)' }}>
-            &lt; {ALERTS_RULES.WARNING_MAX_PPM} {scrubber.unit}
+            {scrubber.gas_type === 'pH' ? '10.0 - 12.0 pH' : `< ${ALERTS_RULES.WARNING_MAX_PPM} ${scrubber.unit}`}
           </div>
         </div>
       </div>

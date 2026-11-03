@@ -5,3 +5,7 @@ psycopg2-binary
 pydantic
 pydantic-settings
 gunicorn
+numpy
+scikit-learn
+requests
+python-dotenv

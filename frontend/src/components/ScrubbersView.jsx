@@ -167,7 +167,7 @@ export default function ScrubbersView({ scrubbers, onSelectScrubber }) {
             </thead>
             <tbody>
               {filtered.map(s => {
-                const status = evaluateStatus(s.currentValue);
+                const status = evaluateStatus(s.currentValue, s.gas_type, s.status);
                 const colorStyle = getStatusColor(status);
                 return (
                   <tr

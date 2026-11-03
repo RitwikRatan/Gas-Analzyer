@@ -6,20 +6,31 @@ export const ALERTS_RULES = {
   CRITICAL_MAX_PPM: 20.0,
 };
 
-export const evaluateStatus = (ppm) => {
-  if (ppm < ALERTS_RULES.WARNING_MAX_PPM) return 'Healthy';
-  if (ppm < ALERTS_RULES.CRITICAL_MAX_PPM) return 'Warning';
+export const evaluateStatus = (val, gasType = 'PPM', statusStr = 'ONLINE') => {
+  if (statusStr && statusStr.toLowerCase() === 'offline') return 'Offline';
+  if (val === null || val === undefined) return 'Offline';
+
+  if (gasType && gasType.toLowerCase() === 'ph') {
+    if (val >= 10.0 && val <= 12.0) return 'Healthy';
+    if ((val >= 7.0 && val < 10.0) || (val > 12.0 && val <= 12.5)) return 'Warning';
+    return 'Critical';
+  }
+
+  if (val < ALERTS_RULES.WARNING_MAX_PPM) return 'Healthy';
+  if (val < ALERTS_RULES.CRITICAL_MAX_PPM) return 'Warning';
   return 'Critical';
 };
 
 export const getStatusColor = (status) => {
-  switch (status.toLowerCase()) {
+  switch ((status || '').toLowerCase()) {
     case 'healthy':
       return { text: '#2E7D32', bg: 'rgba(46, 125, 50, 0.12)', border: 'rgba(46, 125, 50, 0.35)' };
     case 'warning':
       return { text: '#d97706', bg: 'rgba(217, 119, 6, 0.12)', border: 'rgba(217, 119, 6, 0.35)' };
     case 'critical':
       return { text: '#dc2626', bg: 'rgba(220, 38, 38, 0.12)', border: 'rgba(220, 38, 38, 0.35)' };
+    case 'offline':
+      return { text: '#94a3b8', bg: 'rgba(148, 163, 184, 0.12)', border: 'rgba(148, 163, 184, 0.35)' };
     default:
       return { text: '#455A64', bg: 'rgba(69, 90, 100, 0.12)', border: 'rgba(69, 90, 100, 0.35)' };
   }
@@ -41,12 +52,12 @@ export const RECOMMENDED_ACTIONS = [
 export const INITIAL_SENSORS = [
   {
     sensor_id: 1,
-    device_name: 'CO',
+    device_name: 'Carbon Monoxide (CO)',
     gas_type: 'CO',
-    currentValue: 0.0,
-    avgValue: 0.0,
-    minValue: 0.0,
-    maxValue: 0.0,
+    currentValue: 4.8,
+    avgValue: 4.85,
+    minValue: 2.82,
+    maxValue: 10.48,
     unit: 'PPM',
     status: 'ONLINE',
     lastUpdated: 'Just now',
@@ -56,12 +67,12 @@ export const INITIAL_SENSORS = [
   },
   {
     sensor_id: 2,
-    device_name: 'H2S',
+    device_name: 'Hydrogen Sulfide (H2S)',
     gas_type: 'H2S',
-    currentValue: 0.0,
-    avgValue: 0.0,
-    minValue: 0.0,
-    maxValue: 0.0,
+    currentValue: 6.4,
+    avgValue: 6.41,
+    minValue: 3.91,
+    maxValue: 23.82,
     unit: 'PPM',
     status: 'ONLINE',
     lastUpdated: 'Just now',
@@ -71,7 +82,7 @@ export const INITIAL_SENSORS = [
   },
   {
     "sensor_id": "AMMONIA-SCRUBBER",
-    "device_name": "AMMONIA-SCRUBBER",
+    "device_name": "Ammonia (NH3) Neutralization Scrubber",
     "gas_type": "pH",
     "currentValue": 0.0,
     "avgValue": 9.8,
@@ -86,7 +97,7 @@ export const INITIAL_SENSORS = [
   },
   {
     "sensor_id": "SCB-604",
-    "device_name": "SCB-604",
+    "device_name": "Hydrochloric Acid (HCl) Scrubber",
     "gas_type": "pH",
     "currentValue": 7.21,
     "avgValue": 7.95,
@@ -101,7 +112,7 @@ export const INITIAL_SENSORS = [
   },
   {
     "sensor_id": "FES-101",
-    "device_name": "FES-101",
+    "device_name": "Acid Fume Extraction (HCl / HNO3) Scrubber",
     "gas_type": "pH",
     "currentValue": 9.8,
     "avgValue": 8.99,
@@ -116,7 +127,7 @@ export const INITIAL_SENSORS = [
   },
   {
     "sensor_id": "SCB-601",
-    "device_name": "SCB-601",
+    "device_name": "Hydrogen Sulfide (H2S) Caustic Scrubber",
     "gas_type": "pH",
     "currentValue": 8.3,
     "avgValue": 8.67,
@@ -131,7 +142,7 @@ export const INITIAL_SENSORS = [
   },
   {
     "sensor_id": "SCB-502",
-    "device_name": "SCB-502",
+    "device_name": "Sulfur Dioxide (SO2) Scrubber",
     "gas_type": "pH",
     "currentValue": 9.69,
     "avgValue": 10.6,
@@ -146,7 +157,7 @@ export const INITIAL_SENSORS = [
   },
   {
     "sensor_id": "SCB-501",
-    "device_name": "SCB-501",
+    "device_name": "Chlorine Gas (Cl2) Absorption Scrubber",
     "gas_type": "pH",
     "currentValue": 11.1,
     "avgValue": 10.47,
@@ -161,7 +172,7 @@ export const INITIAL_SENSORS = [
   },
   {
     "sensor_id": "SCB-701",
-    "device_name": "SCB-701",
+    "device_name": "VOC / Solvent Vapor Carbon Scrubber",
     "gas_type": "pH",
     "currentValue": 0.0,
     "avgValue": 0.0,
@@ -176,7 +187,7 @@ export const INITIAL_SENSORS = [
   },
   {
     "sensor_id": "FES-102",
-    "device_name": "FES-102",
+    "device_name": "Alkaline Amine (NH3 / Amines) Fume Scrubber",
     "gas_type": "pH",
     "currentValue": 9.5,
     "avgValue": 9.5,
@@ -191,7 +202,7 @@ export const INITIAL_SENSORS = [
   },
   {
     "sensor_id": "SCB-304",
-    "device_name": "SCB-304",
+    "device_name": "Sodium Hypochlorite (NaOCl) Odor Scrubber",
     "gas_type": "pH",
     "currentValue": 9.51,
     "avgValue": 8.96,
@@ -206,7 +217,7 @@ export const INITIAL_SENSORS = [
   },
   {
     "sensor_id": "SCB-605",
-    "device_name": "SCB-605",
+    "device_name": "Bromine Vapor (Br2) Neutralization Scrubber",
     "gas_type": "pH",
     "currentValue": 8.27,
     "avgValue": 10.23,
@@ -221,7 +232,7 @@ export const INITIAL_SENSORS = [
   },
   {
     "sensor_id": "SCB-303",
-    "device_name": "SCB-303",
+    "device_name": "Nitrogen Oxides (NOx) Reduction Scrubber",
     "gas_type": "pH",
     "currentValue": 10.55,
     "avgValue": 11.14,
@@ -236,7 +247,7 @@ export const INITIAL_SENSORS = [
   },
   {
     "sensor_id": "SCB-301",
-    "device_name": "SCB-301",
+    "device_name": "Hydrogen Sulfide (H2S) Primary Scrubber",
     "gas_type": "pH",
     "currentValue": 11.5,
     "avgValue": 11.07,
@@ -251,7 +262,7 @@ export const INITIAL_SENSORS = [
   },
   {
     "sensor_id": "GCB-6-SCRUBBER",
-    "device_name": "GCB-6-SCRUBBER",
+    "device_name": "Chlorinated Gas Absorption Column (Cl2)",
     "gas_type": "pH",
     "currentValue": 0.0,
     "avgValue": 0.0,
@@ -266,7 +277,7 @@ export const INITIAL_SENSORS = [
   },
   {
     "sensor_id": "SCB-107",
-    "device_name": "SCB-107",
+    "device_name": "Methyl Chloride (CH3Cl) Off-Gas Scrubber",
     "gas_type": "pH",
     "currentValue": 0.0,
     "avgValue": 9.13,
@@ -281,7 +292,7 @@ export const INITIAL_SENSORS = [
   },
   {
     "sensor_id": "SCB-106",
-    "device_name": "SCB-106",
+    "device_name": "Triethylamine (TEA) Basic Scrubber",
     "gas_type": "pH",
     "currentValue": 0.0,
     "avgValue": 8.37,
@@ -296,7 +307,7 @@ export const INITIAL_SENSORS = [
   },
   {
     "sensor_id": "SCB-105",
-    "device_name": "SCB-105",
+    "device_name": "Acetic Acid (CH3COOH) Vapor Scrubber",
     "gas_type": "pH",
     "currentValue": 10.7,
     "avgValue": 11.23,
@@ -311,7 +322,7 @@ export const INITIAL_SENSORS = [
   },
   {
     "sensor_id": "SCB-901",
-    "device_name": "SCB-901",
+    "device_name": "Emergency Caustic Tail-Gas (NaOH) Scrubber",
     "gas_type": "pH",
     "currentValue": 11.68,
     "avgValue": 11.49,
@@ -326,7 +337,7 @@ export const INITIAL_SENSORS = [
   },
   {
     "sensor_id": "SCB-102",
-    "device_name": "SCB-102",
+    "device_name": "Phosgene / Carbonyl Gas (COCl2) Scrubber",
     "gas_type": "pH",
     "currentValue": 7.52,
     "avgValue": 8.59,
@@ -341,7 +352,7 @@ export const INITIAL_SENSORS = [
   },
   {
     "sensor_id": "SCB-104",
-    "device_name": "SCB-104",
+    "device_name": "Sulfuric Acid (H2SO4) Mist Scrubber",
     "gas_type": "pH",
     "currentValue": 12.5,
     "avgValue": 11.34,
@@ -356,7 +367,7 @@ export const INITIAL_SENSORS = [
   },
   {
     "sensor_id": "SCB-302",
-    "device_name": "SCB-302",
+    "device_name": "Hydrogen Bromide (HBr) Scrubber",
     "gas_type": "pH",
     "currentValue": 6.54,
     "avgValue": 7.62,
@@ -371,7 +382,7 @@ export const INITIAL_SENSORS = [
   },
   {
     "sensor_id": "SCB-606",
-    "device_name": "SCB-606",
+    "device_name": "Formaldehyde (HCHO) Recovery Scrubber",
     "gas_type": "pH",
     "currentValue": 13.28,
     "avgValue": 11.82,
@@ -386,7 +397,7 @@ export const INITIAL_SENSORS = [
   },
   {
     "sensor_id": "SCB-103",
-    "device_name": "SCB-103",
+    "device_name": "Acid Gas Multi-Stage (HCl / H2S) Scrubber",
     "gas_type": "pH",
     "currentValue": 8.81,
     "avgValue": 8.44,
